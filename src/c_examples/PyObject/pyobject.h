@@ -16,6 +16,7 @@ typedef struct _typeObject
     const char *name;               // type name( for example 'numbers')
     void (*ty_print)(PyObject *);   // print function
     void (*ty_dealloc)(PyObject *); // deacollaction function
+    int (*ty_len)(PyObject *); // getting the len of string
 
 } PyTypeObject;
 
@@ -40,6 +41,8 @@ void PyInt_Print(PyObject *obj);
 
 PyStrObject *PyStr_Create(const char *mesaage);
 void PyStr_Print(PyObject *obj);
+int PyStr_Len(PyObject *obj);
+
 
 
 #endif
