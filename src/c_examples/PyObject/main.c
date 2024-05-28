@@ -13,7 +13,8 @@ int main(void)
         PyInt_Type.ty_print((PyObject *)int_object);
         int referenceCount = ReferenceCount(int_object);
         printf("The number of reference of int_object is %d\n", referenceCount);
-        int_object_two = PyInt_Create(315);
+        Reassign_Int_Object(&int_object_two, 654);
+        referenceCount = ReferenceCount(int_object);
         printf("The number of reference of int_object is %d\n", referenceCount);
         PyInt_Type.ty_dealloc(int_object);
     }

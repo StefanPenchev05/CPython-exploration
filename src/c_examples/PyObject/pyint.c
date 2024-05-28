@@ -29,6 +29,14 @@ PyIntObject *PyInt_Create(int value)
     return obj;
 }
 
+void Reassign_Int_Object(PyObject **_object, int newValue)
+{
+    if(*_object != NULL){
+        Py_DECREF(*_object);}
+    
+    *_object = PyInt_Create(newValue);
+}
+
 void PyInt_Print(PyObject *_object)
 {
     PyIntObject *int_object = (PyIntObject *)_object;
@@ -47,5 +55,6 @@ PyTypeObject PyInt_Type =
         "integer",
         PyInt_Print,
         Py_Dealloc,
-        ReferenceCount
+        ReferenceCount,
+        Reassign_Int_Object
     };

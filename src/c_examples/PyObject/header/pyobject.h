@@ -17,7 +17,8 @@ typedef struct _typeObject
     void (*ty_print)(PyObject *);   // print function
     void (*ty_dealloc)(PyObject *); // deallaction function
     int (*ty_ob_ref)(PyObject *);   // show the number of reference of the object
-    int (*ty_len)(PyObject *);      // getting the len of string
+    void (*reassign)(PyObject **, int);
+    int (*ty_len)(PyObject *); // getting the len of string
 
 } PyTypeObject;
 
@@ -30,7 +31,7 @@ typedef struct _registry
 
 Registry registry = {NULL, 0, 0};
 
-void Py_INCREREF(PyObject * obj);
+void Py_INCREREF(PyObject *obj);
 void Py_DECREF(PyObject *obj);
 void Py_Dealloc(PyObject *_object)
 {
@@ -39,12 +40,12 @@ void Py_Dealloc(PyObject *_object)
 
 void Add_to_registry(PyObject *obj)
 {
-    if(registry.count >= registry.capacity)
+    if (registry.count >= registry.capacity)
     {
         registry.capacity = registry.capacity == 0 ? 5 : registry.capacity * 2;
         registry.objects = realloc(registry.objects, registry.capacity * sizeof(PyObject *));
     }
     registry.objects[registry.count++] = obj;
-} 
+}
 
 #endif
