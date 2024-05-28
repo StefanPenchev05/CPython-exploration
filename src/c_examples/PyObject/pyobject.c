@@ -1,0 +1,80 @@
+#include "./pyobject.h"
+
+void Py_INCREREF(PyObject *_object)
+{
+    _object->ob_refcnt++;
+}
+
+void Py_DECREF(PyObject *_object)
+{
+    if(--_object->ob_refcnt == 0)
+    {
+        Py_Dealloc(_object);
+    }
+}
+
+void Py_Dealloc(PyObject *_object)
+{
+    free(_object);
+}
+
+PyIntObject *PyInt_Create(int value)
+{
+    PyIntObject *obj = (PyIntObject*) malloc(sizeof(int));
+    if(obj != NULL)
+    {
+        obj->ob_base.ob_refcnt = 1;
+        extern PyTypeObject PyInt_Type;
+        obj->ob_base.ob_type = &PyInt_Type;
+        obj->ob_ival = value;
+    }
+
+    return obj;
+}
+
+PyStrObject *PyStr_Create(const char *message)
+{
+    PyStrObject *obj = (PyStrObject *) malloc(sizeof(message) / sizeof(message[0]));
+    if(obj != NULL)
+    {   
+        obj->ob_base.ob_refcnt = 1;
+        extern PyTypeObject PyStr_Type;
+        obj->ob_base.ob_type = &PyStr_Type;
+        obj->message = message;
+    }
+
+    return obj;
+}
+
+
+
+void PyInt_Print(PyObject *_object)
+{
+    PyIntObject *int_object = (PyIntObject *) _object;
+    int value = int_object->ob_ival;
+    const char *name = int_object->ob_base.ob_type->name;
+    printf("Type is int - the value of %s is %d \n", name, value);
+}
+
+void PyStr_Print(PyObject *_object)
+{
+    PyStrObject *string_object = (PyStrObject *) _object;
+    const char *message = string_object->message;
+    const char *name = string_object->ob_base.ob_type->name;
+    printf("Type is string - the value of %s is %s \n", name, message);
+}
+
+PyTypeObject PyInt_Type = 
+{
+    "x",
+    PyInt_Print,
+    Py_Dealloc
+};
+
+PyTypeObject PyStr_Type = 
+{
+    "message",
+    PyStr_Print,
+    Py_Dealloc
+};
+ 
