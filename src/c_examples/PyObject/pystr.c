@@ -1,4 +1,4 @@
-#include "./pystr.h"
+#include "./header/pystr.h"
 
 PyStrObject *PyStr_Create(const char *message)
 {

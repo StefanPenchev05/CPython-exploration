@@ -1,13 +1,20 @@
+#include "./pyobject.c"
 #include "./pyint.c"
 #include "./pystr.c"
 
 int main(void)
 {
     PyIntObject *int_object = PyInt_Create(542);
+    PyIntObject *int_object_two = PyInt_Create(542);
+    PyIntObject *int_object_three = PyInt_Create(542);
 
     if(int_object != NULL)
     {
         PyInt_Type.ty_print((PyObject *)int_object);
+        int referenceCount = ReferenceCount(int_object);
+        printf("The number of reference of int_object is %d\n", referenceCount);
+        int_object_two = PyInt_Create(315);
+        printf("The number of reference of int_object is %d\n", referenceCount);
         PyInt_Type.ty_dealloc(int_object);
     }
 

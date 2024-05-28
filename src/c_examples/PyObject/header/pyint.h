@@ -11,5 +11,6 @@ typedef struct
 
 PyIntObject *PyInt_Create(int value);
 void PyInt_Print(PyObject *obj);
+int ReferenceCount(PyObject *obj);
 
 #endif
