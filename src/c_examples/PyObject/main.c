@@ -1,4 +1,5 @@
-#include "./pyobject.c"
+#include "./pyint.c"
+#include "./pystr.c"
 
 int main(void)
 {

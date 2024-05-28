@@ -16,33 +16,15 @@ typedef struct _typeObject
     const char *name;               // type name( for example 'numbers')
     void (*ty_print)(PyObject *);   // print function
     void (*ty_dealloc)(PyObject *); // deacollaction function
-    int (*ty_len)(PyObject *); // getting the len of string
+    int (*ty_len)(PyObject *);      // getting the len of string
 
 } PyTypeObject;
 
-typedef struct
-{
-    PyObject ob_base;
-    int ob_ival;
-} PyIntObject;
-
-typedef struct
-{
-    PyObject ob_base;
-    const char *message;
-} PyStrObject;
-
 void Py_INCREREF(PyObject *obj);
 void Py_DECREF(PyObject *obj);
-void Py_Dealloc(PyObject *obj);
-
-PyIntObject *PyInt_Create(int value);
-void PyInt_Print(PyObject *obj);
-
-PyStrObject *PyStr_Create(const char *mesaage);
-void PyStr_Print(PyObject *obj);
-int PyStr_Len(PyObject *obj);
-
-
+void Py_Dealloc(PyObject *_object)
+{
+    free(_object);
+}
 
 #endif
