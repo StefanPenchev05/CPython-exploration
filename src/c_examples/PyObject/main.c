@@ -7,11 +7,13 @@ int main(void)
     if(int_object != NULL)
     {
         PyInt_Type.ty_print((PyIntObject *)int_object);
+        PyInt_Type.ty_dealloc(int_object);
     }
 
     PyStrObject *string_object = PyStr_Create("Hell, world!");
     if(string_object != NULL)
     {
         PyStr_Type.ty_print((PyStrObject*) string_object);
+        PyStr_Type.ty_dealloc(string_object);
     }
 }
