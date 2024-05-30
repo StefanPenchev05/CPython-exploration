@@ -1,3 +1,5 @@
+import math
+
 def ifClause():
     # user input - input
     # convert str into int 
@@ -79,7 +81,52 @@ def forClause():
     # Print the list of seasons with their corresponding indices using the enumerate() function
     print(list(enumerate(seasons)))
     
+def matchState():
+    http_error = int(input("Give error code for https: "))
+
+    # The match statement is used to match the value of http_error against different patterns (in this case, different integers)
+    match http_error:
+        # If http_error is 400, this block of code is executed
+        case 400:
+            print("Bad Request")
+        # If http_error is 401, 403, or 404, this block of code is executed
+        case 401 | 403 | 404:
+            print("Not allowed")
+        # If http_error is 500, this block of code is executed
+        case 500:
+            print("Server Error")
+        # The underscore (_) is a wildcard pattern that matches anything
+        # If none of the above patterns match, this block of code is executed
+        case _:
+            print("Something's wrong with the internet")
+            
+    shapes = [
+        {"type": "circle", "radius": 5},
+        {"type": "rectangle", "width": 10, "height": 5},
+        {"type": "square", "side": 7},
+        {"type": "circle", "radius": 2},
+        {"type": "square", "side": 4},
+        {"type": "rectangle", "width": 2, "height": 3},
+    ]
+
+    for shape in shapes:
+        match shape:
+            case {"type": "circle", "radius": radius}:
+                area = math.pi * radius ** 2
+                print("The area of the circle is {0}".format(area))
+            case {"type": "rectangle", "width": width, "height": height}:
+                area = width * height
+                print("The area of rectangle is {0}".format(area))
+            case {"type": "square", "side": side}:
+                area = side ** 2
+                print("The area of square is {0}".format(area))
+            case _:
+                print("Unknown shape")
+                    
+        
+
 
 #ifClause()
 #rangeCommand()
-forClause()
+#forClause()
+matchState()
