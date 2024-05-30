@@ -123,10 +123,59 @@ def matchState():
             case _:
                 print("Unknown shape")
                     
-        
+def docString():
+    """
+        This is olny a test.
+        Wow this is really cool.
+        I have never seen something like this before
+    """       
+    pass
 
+def greet(question_to_ask, name="Stefan", lastName="Penchev") -> str:
+    """ This function greet some person with its name
+
+    Args:
+        question_to_ask (str, required): Question to ask the person after greeting
+        name (str, optional): First name. Defaults to "Stefan".
+        lastName (str, optional): Last Name. Defaults to "Penchev".
+    Returns:
+        str: "Hello {name} {lastName}\n{question_to_ask}" 
+    """
+    print("Hello {0} {1}!".format(name, lastName))
+    match question_to_ask.lower():
+        case "how are you":
+            return "Good, thanks for asking!"
+        case "what's up":
+            return "Not much, just working!"
+        case "what are you doing":
+            return "I'm helping people learn Python!"
+        case _:
+            return "I'm not sure how to respond to that."
+    
+def cheeseshop(kind, *arguments, **keywords):
+    print("-- Do you have any", kind, "?")
+    print("-- I'm sorry, we're all out of", kind)
+    for argument in arguments:
+        print(f"Argument: {argument}")
+    for keyword in keywords:
+        print(f"{keyword} : {keywords[keyword]}")
 
 #ifClause()
 #rangeCommand()
 #forClause()
-matchState()
+#matchState()
+#print(docString.__doc__)
+
+# Showing the memory address of the function
+print(docString)
+
+# Return type is None
+print(docString())
+
+# Return type is Str
+print(greet("what are you doing"))
+
+cheeseshop("Random", "It's really very, VERY runny, sir.",
+           shopkeeper="Michael Palin",
+           client="John Cleese",
+           sketch="Cheese Shop Sketch")
