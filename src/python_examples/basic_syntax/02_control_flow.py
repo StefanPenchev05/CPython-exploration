@@ -160,6 +160,28 @@ def cheeseshop(kind, *arguments, **keywords):
     for keyword in keywords:
         print(f"{keyword} : {keywords[keyword]}")
 
+
+def join(list, *, separator = ",")->str:
+    joinedString = ""
+    for el in list:
+        if isinstance(el, str):
+            joinedString += f"{el}" if len(joinedString) == 0 else f"{separator} {el}"
+        else:
+            pass
+    return joinedString
+        
+    
+def concat(*args, seperator = ",")-> str:
+    """ This join different strings in one string
+
+    Args:
+        seperator (str, optional): _description_. Defaults to ",".
+
+    Returns:
+        str: _description_
+    """
+    return join(args)
+
 #ifClause()
 #rangeCommand()
 #forClause()
@@ -179,3 +201,6 @@ cheeseshop("Random", "It's really very, VERY runny, sir.",
            shopkeeper="Michael Palin",
            client="John Cleese",
            sketch="Cheese Shop Sketch")
+
+print(join(["apple", "has been", "eaten"], separator="`"))
+print(concat("apple", "has been", "eaten", " "))
